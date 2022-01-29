@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1> {{cats}} </h1>
+
+{% for post in category_post %}
+<h1> <a href=" {%url 'article-detail' post.pk%} ">{{post.title}}</a></h1> <br>
+<h3> {{post.author.first_name}}/
+    {{post.author.last_name}} // {{post.post_date}}
+ </h3>
+ {%if user.is_authenticated%}
+ <small> <a href="{%url 'update_post' post.pk%}">Edit</a></small>
+ <small> <a href="{%url 'delete_post' post.pk%}">Delet</a></small>
+ {%endif%}
+<p>
+     {{post.body}}
+</p>
+{%endfor%}
+<br>
+<a href=" {%url 'home' %} " class="btn btn-warning">back</a> <br>
+
+
+{% endblock %}
